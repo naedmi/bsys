@@ -12,6 +12,9 @@ v: vector/array to specify the argv[] array of the new program
 l: arguments of the new program as a list
 e: environment of the new program
 p: path to search for the new program
+
+performance, dass das programm z.b. nicht den gesamten pfad durchlaufen 
+muss, wenn das folgeprogramm direkt genannt wird. -> sicherheit?
 */
 
 #include <stdio.h>
@@ -21,6 +24,11 @@ p: path to search for the new program
 
 int main(int argc, char *argv[])
 {
+    if(argc != 1)
+    {
+        fprintf(stderr, "Wrong input: %s", argv[1]);
+        exit(1);
+    }
 
     int rc = fork();
 
@@ -42,7 +50,7 @@ int main(int argc, char *argv[])
         // execv("/bin/ls", args);
         // execvp("/bin/ls", args);
         // execvpe("/bin/ls", args); // keine POSIX
-        // execve("/bin/ls", args, env);
+        execve("/bin/ls", args, env);
     }
     return 0;
 }

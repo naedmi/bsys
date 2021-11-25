@@ -1,11 +1,12 @@
-/*Now write a program that uses wait() to wait for the child process
+/* Now write a program that uses wait() to wait for the child process
 to finish in the parent. What does wait() return? What happens if
 you use wait() in the child?
 
 wait() returns the process id of the terminated child process 
 in the parent process (if more then one, it choses arbitrarily which 
 ones id it returns).
-returns 0 in the child process. -1 if the call fails.
+returns 0 in the child process. -1 if the call fails (e.g. because there
+is no child to the current process).
 */
 
 #include <stdio.h>
@@ -15,6 +16,12 @@ returns 0 in the child process. -1 if the call fails.
 
 int main(int argc, char *argv[])
 {
+    if(argc != 1)
+    {
+        fprintf(stderr, "Wrong input: %s", argv[1]);
+        exit(1);
+    }
+    
     int rc = fork();
     
     if (rc < 0)

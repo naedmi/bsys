@@ -1,9 +1,9 @@
-/*Write another program using fork(). The child process should
+/* Write another program using fork(). The child process should
 print “hello”; the parent process should print “goodbye”. You should
 try to ensure that the child process always prints first; can you do
 this without calling wait() in the parent?
 
-you can do it using signals.*/
+you can do it using signals. */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +12,12 @@ you can do it using signals.*/
 
 int main(int argc, char *argv[])
 {
+    if(argc != 1)
+    {
+        fprintf(stderr, "Wrong input: %s", argv[1]);
+        exit(1);
+    }
+    
     int rc = fork();
     
     if (rc < 0)
@@ -27,6 +33,7 @@ int main(int argc, char *argv[])
     else // parent goes down this path (main)
     {
         kill(getpid(), SIGSTOP);
+        // raise(SIGSTOP);
         printf("goodbye\n");
     }
     return 0;

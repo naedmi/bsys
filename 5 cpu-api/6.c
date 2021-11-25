@@ -1,9 +1,9 @@
-/*Write a slight modification of the previous program, this time us-
+/* Write a slight modification of the previous program, this time us-
 ing waitpid() instead of wait(). When would waitpid() be
 useful?
 
 if there are several childs and you want to make sure the parent
-process continues after a specific one.*/
+process continues after a specific one. */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +12,12 @@ process continues after a specific one.*/
 
 int main(int argc, char *argv[])
 {
+    if(argc != 1)
+    {
+        fprintf(stderr, "Wrong input: %s", argv[1]);
+        exit(1);
+    }
+    
     int rc = fork();
     
     if (rc < 0)

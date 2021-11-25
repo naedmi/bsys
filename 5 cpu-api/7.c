@@ -1,9 +1,11 @@
-/*Write a program that creates a child process, and then in the child
+/* Write a program that creates a child process, and then in the child
 closes standard output (STDOUT FILENO). What happens if the child
 calls printf() to print some output after closing the descriptor?
 
-nothing happens.*/
+no output. */
 
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -11,6 +13,12 @@ nothing happens.*/
 
 int main(int argc, char *argv[])
 {
+    if(argc != 1)
+    {
+        fprintf(stderr, "Wrong input: %s", argv[1]);
+        exit(1);
+    }
+    
     int rc = fork();
     if (rc < 0)
     {
@@ -24,8 +32,8 @@ int main(int argc, char *argv[])
     }
     else
     {
-        int rc_wait = wait(NULL);
-        // printf("parent\n");
+        wait(NULL);
+        printf("parent\n");
     }
     return 0;
 }

@@ -3,6 +3,7 @@
 * roughly measures the cost of accessing each page of the TLB.
 * 
 * Nadine Görzen, 15.11.2021
+* Gruppe 5
 */
 #define _GNU_SOURCE
 #define TO_NANO 1e+9
@@ -16,6 +17,7 @@
 #include <sched.h>
 #include <pthread.h>
 
+// übung:
 // uint64_t
 // rechnung besser aufteilen,
 // um überläufe zu verhindern: (stop.sec - start.sec) * SEC_TO_NSEC + stop.nsec - start.nsec
@@ -124,7 +126,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    int *a = (int*) calloc(NUMPAGES * jump, sizeof(int));
+    int *a = (int*) calloc(NUMPAGES * jump, sizeof(int)); // NUMPAGES * PAGESIZE?
     if (a == NULL) {
         fprintf(stderr, "memory allocation failed.\n");
         exit(1);
@@ -148,8 +150,7 @@ int main(int argc, char *argv[])
     for (long int i = bound; i < trials - bound; i++) {
         time += (time_ar[i]/NUMPAGES);
     }
-    printf("average cost:\n");
-    printf("%lld ns\n", (time / ((unsigned long long) trials - 2*bound) / NUMPAGES));
+    printf("average cost: %lld ns\n", (time / ((unsigned long long) trials - 2*bound)));
 
     free(a);
     free(time_ar);
