@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
             Pthread_join(threads[i], NULL);
         }
         clock_gettime(CLOCK_MONOTONIC_RAW, &end);
-        printf("%d: total time: %fs\n", thread_nr, ((duration(&start, &end)-2*loopDuration(thread_nr))/TO_NANO));
+        printf("%d: total time: %fs\n", thread_nr, duration(&start, &end)/TO_NANO);
         printf("\n------------------------------------------------------\n");
     }
     List_Free(list);

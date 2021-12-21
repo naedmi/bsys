@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
         }
         assert(clock_gettime(CLOCK_MONOTONIC_RAW, &end) == 0);
 
-        printf("%d: total time: %fs\n", thread_nr, ((duration(&start, &end)-2*loopDuration(thread_nr))/TO_NANO));
+        printf("%d: total time: %fs\n", thread_nr, (duration(&start, &end))/TO_NANO);
         printf("\n------------------------------------------------------\n");
 
         Pthread_mutex_destroy(&counter->lock);

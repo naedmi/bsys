@@ -29,7 +29,7 @@ void init(counter_t *c, int threshold) {
 //         local amount; once local amount has risen 'threshold',
 //         grab global lock and transfer local values to it
 void update(counter_t *c, int threadID, int amt) {
-    int cpu = threadID % NUMCPUS;
+    int cpu = threadID % NUMCPUS; // threadIDs fortlaufend?
     Pthread_mutex_lock(&c->llock[cpu]);
     c->local[cpu] += amt;
     if (c->local[cpu] >= c->threshold) {
