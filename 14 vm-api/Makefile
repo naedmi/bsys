@@ -1,4 +1,4 @@
-TARGET = null memory-leak array_100 invalid-free
+TARGET = null memory-leak array_100 array_free invalid-free vector
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Wpedantic -std=$(STD)
